@@ -27,8 +27,8 @@ option(GLM_BUILD_INSTALL "Generate the install target" ${GLM_IS_MASTER_PROJECT})
 
 include(GNUInstallDirs)
 
-option(GLM_ENABLE_CXX_17 "Enable C++ 17" OFF)
-option(GLM_ENABLE_CXX_20 "Enable C++ 20" OFF)
+option(GLM_ENABLE_CXX_17 "Enable C++ 17" ON)
+option(GLM_ENABLE_CXX_20 "Enable C++ 20" ON)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
@@ -84,7 +84,6 @@ if(GLM_ENABLE_LANG_EXTENSIONS)
 	if((CMAKE_CXX_COMPILER_ID MATCHES "Clang") OR (CMAKE_CXX_COMPILER_ID MATCHES "GNU"))
 		add_compile_options(-fms-extensions)
 	endif()
-	message(STATUS "GLM: Build with C++ language extensions")
 else()
 	set(CMAKE_CXX_EXTENSIONS OFF)
 	if(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
@@ -221,11 +220,6 @@ elseif(GLM_ENABLE_SIMD_NEON)
 endif()
 
 add_subdirectory(glm)
-
-if (GLM_BUILD_TESTS)
-	include(CTest)
-	add_subdirectory(test)
-endif()
 
 if (GLM_BUILD_INSTALL)
 	include(CPack)
